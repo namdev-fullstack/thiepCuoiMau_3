@@ -1,0 +1,807 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(to bottom, #fffcfb, #f2e8f0);
+
+}
+
+.container {
+  max-width: 436px;
+  /* padding-bottom: 150px; */
+  border: 1px solid #ddd;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.cover-wrapper {
+  /* display: none; */
+  max-width: 436px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: fixed;
+  /* hoặc absolute */
+  inset: 0;
+  /* thay cho top:0; left:0; right:0; bottom:0 */
+  z-index: 9999;
+  height: 100vh;
+}
+
+.cover-wrapper.open.done {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.split {
+  width: 100%;
+  height: 100%;
+  background-image: url("https://png.pngtree.com/background/20210710/original/pngtree-classical-chinese-wedding-stage-background-design-picture-image_977656.jpg");
+  /* background-image: url("https://png.pngtree.com/background/20250103/original/pngtree-elegant-white-curtain-a-stunning-background-or-textured-element-picture-image_15290531.jpg"); */
+  background-size: cover;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 1.5s ease-in-out;
+  z-index: 2;
+}
+
+.split.left {
+  transform-origin: left center;
+  position: relative;
+  background-position: left;
+
+}
+
+
+
+.split.right {
+  background-position: right;
+
+  position: relative;
+  transform-origin: right center;
+}
+
+.cover-wrapper.open .split.left {
+  transform: translateX(-154%);
+}
+
+.cover-wrapper.open .split.right {
+  transform: translateX(154%);
+}
+
+.split-right-logo {
+  width: 140px;
+  border: 2px solid #ffbdbd;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -70px;
+  z-index: 3;
+  transition: transform 0.8s ease;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+  }
+
+  50% {
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.invite-text {
+  position: absolute;
+  top: 62%;
+  left: -2px;
+  font-size: 16px;
+  font-family: "Playfair Display", serif;
+  color: #ffffff;
+  font-weight: 600;
+  text-align: center;
+  animation: fadeBounce 2s infinite;
+  z-index: 4;
+}
+
+@keyframes fadeBounce {
+
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: translate(-50%, 0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -5px);
+  }
+}
+
+.cover-wrapper.open .invite-text {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* 🌸 HOA RƠI */
+.flower-container {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.flower {
+  position: absolute;
+  top: -50px;
+  width: 30px;
+  height: 30px;
+  background-image: url("https://img1.picmix.com/output/stamp/normal/3/1/3/2/1432313_79d8a.gif");
+  background-size: cover;
+  opacity: 0;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------  */
+
+
+/* ====================== AUDIO ================== */
+.audio-toggle {
+  position: fixed;
+  bottom: 14px;
+  right: 14px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff8f9;
+  border: 2px solid #f3a4b3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
+.audio-toggle:hover {
+  transform: scale(1.1);
+}
+
+.audio-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.8s linear;
+}
+
+.audio-toggle.playing .audio-icon {
+  animation: spin 3s linear infinite;
+}
+
+.audio-line {
+  position: absolute;
+  width: 3px;
+  height: 24px;
+  background: #ff6b81;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.audio-toggle.paused .audio-line {
+  opacity: 1;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 436px) {
+  .container {
+    max-width: 100%;
+    overflow-x: hidden;
+    /* Full màn hình điện thoại */
+    scroll-behavior: smooth;
+  }
+}
+
+/* ======================== Content =================  */
+.heading {
+  font-size: 24px;
+    color: #3f3f3f;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 4px;
+  position: relative;
+}
+
+.heading img {
+  position: absolute;
+      left: 10px;
+    width: 88px;
+    top: -6px;
+    transform: rotate(335deg);
+}
+
+.sub-heading {
+  font-size: 27px;
+  text-align: center;
+  font-weight: 500;
+  font-family: "Great Vibes", serif;
+  /* margin-top: 20px; */
+  margin-bottom: 12px;
+}
+
+.icon-header {
+  display: flex;
+  margin: 0 auto;
+  width: 94px;
+}
+
+.image-welcome {
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 16px auto;
+}
+
+.header-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 10px;
+}
+
+.header-time-text {
+  font-size: 16px;
+  font-weight: 400;
+
+  color: #111111;
+}
+
+.header-date {
+  font-size: 20px;
+  font-weight: 500;
+
+  color: #1f1f1f;
+}
+
+.wedding-divider-header {
+  width: 296px;
+  display: flex;
+  margin: 0 auto;
+      transform: scaleY(-1);
+    margin-top: -18px;
+}
+
+.header-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #313131;
+  text-align: center;
+  font-family: "Libre Baskerville", serif;
+
+}
+
+.banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.banner-img-left {
+  position: absolute;
+  left: 36px;
+  height: 207px;
+  top: -10px;
+  transform: rotate(4deg);
+}
+
+.banner-img {
+  width: 80%;
+  border-radius: 12px;
+  border: 6px solid #f387af40;
+  z-index: 2;
+}
+
+.family {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -14px;
+  padding: 0 10px;
+  text-align: center;
+  position: relative;
+}
+
+.family img {
+  position: absolute;
+  top: -60px;
+  right: 41%;
+  /* transform: translateX(-50%); */
+  width: 94px;
+}
+
+.family p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f1f1f;
+}
+
+.family span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #444444;
+}
+
+.header-name {
+  text-align: center;
+  margin: 10px auto;
+  margin-top: 20px;
+  font-size: 32px;
+  text-align: center;
+  font-weight: 500;
+  font-family: "Great Vibes", serif;
+  word-spacing: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.header-name-item {
+  text-align: center;
+}
+.header-name-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  border: 1px solid #f387af40;  
+}
+.header-name-item-center {
+  width: 64px;
+}
+.wedding-divider-vertical {
+
+    width: 96px;
+  display: flex
+;
+    margin: 20px auto;
+}
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 100%;
+  padding: 0 10px;
+  height: fit-content;
+  margin: 0 auto;
+  margin-top: 72px;
+  margin-bottom: 58px;
+  /* Ngăn scroll ngang */
+}
+
+.photo-gallery img {
+  width: 100%;
+  height: 204px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid #f387af40;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.photo-gallery img.center {
+  margin-top: -20px;
+}
+
+.header-label-fullName {
+  width: fit-content;
+  margin: 10px auto;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 500;
+  font-family: "Great Vibes", serif;
+  word-spacing: 10px;
+  border-bottom: 2px solid #f387af40;
+  padding: 6px 36px;
+}
+
+.header-label-image {
+  display: flex;
+  margin: 10px auto;
+  width: 100px;
+}
+
+.header-label-sub {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.header-time-body {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.header-time-item {
+  text-align: right;
+}
+
+.header-time-item.center {
+  text-align: center;
+
+  border-left: 2px solid #f92d7740;
+  border-right: 2px solid #ff398140;
+}
+
+.header-time-item-strong {
+  font-size: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+}
+
+.header-time-item.right {
+  text-align: left;
+}
+
+.header-time-body-sub {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1f1f1f;
+  font-style: italic;
+}
+
+.address {
+  margin: 30px auto;
+  text-align: center;
+}
+
+.address img {
+  transform: rotate(274deg);
+  width: 96px;
+  margin-top: -28px;
+}
+
+.address-body {
+  margin: 10px auto;
+  border: 3px solid #af0000;
+  padding: 16px 24px;
+  border-radius: 22px;
+  width: fit-content;
+}
+
+.address-body h2 {
+  font-size: 18px;
+}
+
+.address-body-text {
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+.address-body-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #eceaea;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: italic;
+     padding: 10px 22px;
+  border-radius: 15px;
+  background-color: #af0000;
+}
+
+.album {
+  margin-top: 20px;
+}
+
+.album h2 {
+  margin-top: -16px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  font-family: "Great Vibes", serif;
+  color: #1f1f1f;
+  word-spacing: 10px;
+}
+
+.album-body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 16px 10px;
+}
+
+.album-body img {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #f387af40;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.savethedate {
+  width: 194px;
+  padding-left: 10px;
+}
+
+
+.banner-footer {
+  position: relative;
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.banner-footer img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Hiệu ứng mờ trên và dưới */
+.banner-footer::before,
+.banner-footer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  /* chỉnh độ cao vùng mờ */
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Mờ phía trên */
+.banner-footer::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+}
+
+/* Mờ phía dưới */
+.banner-footer::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
+}
+
+
+
+/* -------------------- LỜI CHÚC ----------------  */
+.wish-form {
+  max-width: 380px;
+  margin: 34px auto;
+  background: #fffafc;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.25);
+}
+
+.wish-form h3 {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  color: #e85b81;
+  margin-bottom: 12px;
+  font-family: "Great Vibes", serif;
+}
+
+.wish-form input,
+.wish-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #f0b6c1;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: none;
+}
+
+.wish-form button {
+  width: 100%;
+  padding: 10px;
+  background: #e85b81;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#wishStatus {
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  margin-top: 6px;
+}
+
+
+
+/* ===== CONTAINER CHÍNH ===== */
+.transfer-card {
+  max-width: 420px;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  /* box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05); */
+  padding: 20px;
+  position: relative;
+  background-image: url('./images/bg-qrcode2.png'
+    );
+  background-repeat: no-repeat;
+  background-position: right 10px top -43px;
+  background-size: contain;
+
+}
+
+.transfer-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  font-family: "Great Vibes", serif;
+  color: #ca0000;
+}
+
+/* ===== QR IMAGE ===== */
+.transfer-card__qr {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  /* hoặc cover */
+}
+
+.transfer-card__qr img {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  background: #fafafa;
+  object-fit: cover;
+}
+
+/* ===== THÔNG TIN NGÂN HÀNG ===== */
+.transfer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 0 14px;
+  padding-top: 20px;
+}
+
+.transfer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-top: 10px;
+}
+
+.transfer-row__label {
+  color: #6b7280;
+  font-size: 14px;
+  min-width: 100px;
+}
+
+.transfer-row__value {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: right;
+  word-break: break-all;
+}
+
+/* ===== NÚT COPY ===== */
+.copy-btn {
+  margin-left: 8px;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 6px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #111;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: #e2e8f0;
+}
+
+.copy-btn img {
+  height: 24px;
+}
+
+.copy-feedback {
+  text-align: right;
+  color: #16a34a;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.25s;
+  margin-top: 4px;
+}
+
+.copy-feedback.show {
+  opacity: 1;
+}
+
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.footer img {
+  height: 70px;
+}
+
+.footer h2 {
+  font-size: 44px;
+  font-weight: 700;
+  text-align: center;
+  font-family: "Great Vibes", serif;
+  color: #644657;
+}
